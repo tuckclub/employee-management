@@ -1,6 +1,7 @@
 package empman;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,6 +12,11 @@ public class EmployeeManager {
     private String intputText(String label) {
         System.out.print(label);
         return scanner.nextLine();
+    }
+
+    private int inputInt(String label) {
+        String text = intputText(label);
+        return Integer.parseInt(text);
     }
 
     private double inputDouble(String label) {
@@ -27,6 +33,18 @@ public class EmployeeManager {
             }
         }
         return maxId + 1;
+    }
+
+    private Employee findEmployeeById(int id) {
+        Employee result = null;
+        Iterator<Employee> iterator = employees.iterator();
+        while (result == null && iterator.hasNext()) {
+            Employee employee = iterator.next();
+            if (employee.getId() == id) {
+                result = employee;
+            }
+        }
+        return result;
     }
 
     public SalaryEmployee addSalaryEmployee() {
@@ -47,6 +65,18 @@ public class EmployeeManager {
         int id = getNextEmployeeId();
         HourlyEmployee employee = new HourlyEmployee(id, name, department, rate, hours);
         employees.add(employee);
+        return employee;
+    }
+
+    public Employee editEmployeeName() {
+        int id = inputInt("Enter Employee ID: ");
+        Employee employee = findEmployeeById(id);
+        if (employee != null) {
+            String newName = intputText("Enter New Name: ");
+            employee.setName(newName);
+        } else {
+            System.out.println("Employee ID Not Found.");
+        }
         return employee;
     }
 }
