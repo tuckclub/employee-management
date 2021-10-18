@@ -14,6 +14,7 @@ public class Main {
             System.out.println("[1] Create Salary Employee.");
             System.out.println("[2] Create Hourly Employee.");
             System.out.println("[3] Edit Employee Name.");
+            System.out.println("[4] Edit Employee Department.");
             System.out.println("[0] Exit Program.");
             System.out.print("Select Menu: ");
             String selection = scanner.nextLine();
@@ -33,6 +34,13 @@ public class Main {
                     if (employee3 != null) {
                         System.out.println("Employee Name Edited: ");
                         System.out.println("\t" + employee3);
+                    }
+                    break;
+                case "4":
+                    Employee employee4 = empman.editEmployeeDepartment();
+                    if (employee4 != null) {
+                        System.out.println("Employee Department Edited: ");
+                        System.out.println("\t" + employee4);
                     }
                     break;
                 case "0":

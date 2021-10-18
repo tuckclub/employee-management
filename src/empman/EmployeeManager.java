@@ -79,4 +79,16 @@ public class EmployeeManager {
         }
         return employee;
     }
+
+    public Employee editEmployeeDepartment() {
+        int id = inputInt("Enter Employee ID: ");
+        Employee employee = findEmployeeById(id);
+        if (employee != null) {
+            String newDepartment = intputText("Enter New Department: ");
+            employee.setDepartment(newDepartment);
+        } else {
+            System.out.println("Employee ID Not Found.");
+        }
+        return employee;
+    }
 }
