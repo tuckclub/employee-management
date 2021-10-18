@@ -38,4 +38,15 @@ public class EmployeeManager {
         employees.add(employee);
         return employee;
     }
+
+    public HourlyEmployee addHourlyEmployee() {
+        String name = intputText("Enter Employee Name: ");
+        String department = intputText("Enter Employee Department: ");
+        double rate = inputDouble("Enter Employee Pay Rate: ");
+        double hours = inputDouble("Enter Employee Hours of Work: ");
+        int id = getNextEmployeeId();
+        HourlyEmployee employee = new HourlyEmployee(id, name, department, rate, hours);
+        employees.add(employee);
+        return employee;
+    }
 }
