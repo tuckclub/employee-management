@@ -34,6 +34,8 @@ public class EmployeeManager {
         String department = intputText("Enter Employee Department: ");
         double salary = inputDouble("Enter Employee Salary: ");
         int id = getNextEmployeeId();
-        return new SalaryEmployee(id, name, department, salary);
+        SalaryEmployee employee = new SalaryEmployee(id, name, department, salary);
+        employees.add(employee);
+        return employee;
     }
 }
