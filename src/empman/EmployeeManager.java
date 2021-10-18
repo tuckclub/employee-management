@@ -142,4 +142,15 @@ public class EmployeeManager {
             return null;
         }
     }
+
+    public Employee deleteEmployee() {
+        int id = inputInt("Enter Employee ID: ");
+        Employee employee = findEmployeeById(id);
+        if (employee != null) {
+            employees.remove(employee);
+        } else {
+            System.out.println("Employee ID Not Found.");
+        }
+        return employee;
+    }
 }
