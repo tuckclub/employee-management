@@ -108,4 +108,21 @@ public class EmployeeManager {
             return null;
         }
     }
+
+    public HourlyEmployee editEmployeePayRate() {
+        int id = inputInt("Enter Employee ID: ");
+        Employee employee = findEmployeeById(id);
+        if (employee == null) {
+            System.out.println("Employee ID Not Found.");
+            return null;
+        } else if (employee instanceof HourlyEmployee) {
+            HourlyEmployee hourlyEmployee = (HourlyEmployee) employee;
+            double newRate = inputDouble("Enter New Pay Rate: ");
+            hourlyEmployee.setRate(newRate);
+            return hourlyEmployee;
+        } else {
+            System.out.println("Employee Does Not Have Pay Rate.");
+            return null;
+        }
+    }
 }
