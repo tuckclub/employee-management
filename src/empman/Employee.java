@@ -1,16 +1,12 @@
 package empman;
 
 public abstract class Employee {
-
     protected String name;
 
     public Employee() {
-        super();
-        this.name = "unknow";
     }
 
     public Employee(String name) {
-        super();
         this.name = name;
     }
 
@@ -27,5 +23,4 @@ public abstract class Employee {
     }
 
     public abstract double computePay();
-
 }

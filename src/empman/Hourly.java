@@ -1,13 +1,10 @@
 package empman;
 
 public class Hourly extends Employee {
-
     private double rate = 0.0;
     private double hours = 1.0;
 
     public Hourly() {
-        super();
-
     }
 
     public Hourly(String name, double rate, double hours) {
@@ -40,6 +37,5 @@ public class Hourly extends Employee {
     public String toString() {
         return super.toString() + " Hourly [rate=" + rate + ", hours=" + hours + "]";
     }
-
 }
 

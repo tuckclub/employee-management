@@ -1,12 +1,10 @@
 package empman;
 
 public class Salary extends Employee implements PrintCheck {
-
     private double salary = 0.0;
 
     public Salary() {
         super("unknown");
-
     }
 
     public Salary(String name, double salary) {
@@ -43,5 +41,4 @@ public class Salary extends Employee implements PrintCheck {
     public void printTo() {
         System.out.printf("Send %.2f$ to " + name + "\n", computePay() - extra);
     }
-
 }
