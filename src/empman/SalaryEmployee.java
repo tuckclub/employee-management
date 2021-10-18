@@ -1,14 +1,10 @@
 package empman;
 
 public class SalaryEmployee extends Employee implements PrintCheck {
-    private double salary = 0.0;
+    private double salary;
 
-    public SalaryEmployee() {
-        super("unknown");
-    }
-
-    public SalaryEmployee(String name, double salary) {
-        super(name);
+    public SalaryEmployee(int id, String name, String department, double salary) {
+        super(id, name, department);
         this.salary = salary;
     }
 
@@ -33,7 +29,8 @@ public class SalaryEmployee extends Employee implements PrintCheck {
     }
 
     public String toString() {
-        return super.toString() + " Salary = [salary=" + salary + "]";
+        return "SalaryEmployee[id = %s, name = %s, department = %s, salary = %.2f]"
+                .formatted(id, name, department, salary);
     }
 
     public void printTo() {

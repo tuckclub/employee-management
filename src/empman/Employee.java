@@ -1,13 +1,22 @@
 package empman;
 
 public abstract class Employee {
+    protected int id;
     protected String name;
+    protected String department;
 
-    public Employee() {
+    public Employee(int id, String name, String department) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
     }
 
-    public Employee(String name) {
-        this.name = name;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -18,8 +27,12 @@ public abstract class Employee {
         this.name = name;
     }
 
-    public String toString() {
-        return "Employee [name=" + name + "]";
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public abstract double computePay();
