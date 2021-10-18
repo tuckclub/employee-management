@@ -2,7 +2,7 @@ package empman;
 
 public class HourlyTest {
     public static void main(String[] args) {
-        Hourly h1 = new Hourly();
+        HourlyEmployee h1 = new HourlyEmployee();
         System.out.println(h1);
         h1.setName("Somchai");
         h1.setHours(100);
@@ -11,7 +11,7 @@ public class HourlyTest {
         System.out.println("Rate: " + h1.getRate());
         System.out.println("Hour: " + h1.getHours());
         System.out.println("Pay: " + h1.computePay());
-        Hourly h2 = new Hourly("Somsri", 30.0, 150);
+        HourlyEmployee h2 = new HourlyEmployee("Somsri", 30.0, 150);
         System.out.println(h2);
         System.out.println("Pay: " + h2.computePay());
     }

@@ -1,15 +1,14 @@
 package empman;
 
-public class Salary extends Employee implements PrintCheck {
+public class SalaryEmployee extends Employee implements PrintCheck {
     private double salary = 0.0;
 
-    public Salary() {
+    public SalaryEmployee() {
         super("unknown");
     }
 
-    public Salary(String name, double salary) {
+    public SalaryEmployee(String name, double salary) {
         super(name);
-
         this.salary = salary;
     }
 
@@ -31,7 +30,6 @@ public class Salary extends Employee implements PrintCheck {
 
     public double computePay() {
         return (salary / 52);
-
     }
 
     public String toString() {
