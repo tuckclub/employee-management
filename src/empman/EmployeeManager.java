@@ -91,4 +91,21 @@ public class EmployeeManager {
         }
         return employee;
     }
+
+    public SalaryEmployee editEmployeeSalary() {
+        int id = inputInt("Enter Employee ID: ");
+        Employee employee = findEmployeeById(id);
+        if (employee == null) {
+            System.out.println("Employee ID Not Found.");
+            return null;
+        } else if (employee instanceof SalaryEmployee) {
+            SalaryEmployee salaryEmployee = (SalaryEmployee) employee;
+            double newSalary = inputDouble("Enter New Salary: ");
+            salaryEmployee.setSalary(newSalary);
+            return salaryEmployee;
+        } else {
+            System.out.println("Employee Does Not Have Salary.");
+            return null;
+        }
+    }
 }
