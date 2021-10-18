@@ -125,4 +125,21 @@ public class EmployeeManager {
             return null;
         }
     }
+
+    public HourlyEmployee editEmployeeHoursOfWork() {
+        int id = inputInt("Enter Employee ID: ");
+        Employee employee = findEmployeeById(id);
+        if (employee == null) {
+            System.out.println("Employee ID Not Found.");
+            return null;
+        } else if (employee instanceof HourlyEmployee) {
+            HourlyEmployee hourlyEmployee = (HourlyEmployee) employee;
+            double newHours = inputDouble("Enter New Hours of Work: ");
+            hourlyEmployee.setHours(newHours);
+            return hourlyEmployee;
+        } else {
+            System.out.println("Employee Does Not Have Hours of Work.");
+            return null;
+        }
+    }
 }

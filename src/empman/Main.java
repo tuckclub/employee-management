@@ -17,6 +17,7 @@ public class Main {
             System.out.println("[4] Edit Employee Department.");
             System.out.println("[5] Edit Employee Salary.");
             System.out.println("[6] Edit Employee Pay Rate.");
+            System.out.println("[7] Edit Employee Hours of Work.");
             System.out.println("[0] Exit Program.");
             System.out.print("Select Menu: ");
             String selection = scanner.nextLine();
@@ -57,6 +58,13 @@ public class Main {
                     if (employee6 != null) {
                         System.out.println("Employee Pay Rate Edited: ");
                         System.out.println("\t" + employee6);
+                    }
+                    break;
+                case "7":
+                    Employee employee7 = empman.editEmployeeHoursOfWork();
+                    if (employee7 != null) {
+                        System.out.println("Employee Hours of Work Edited: ");
+                        System.out.println("\t" + employee7);
                     }
                     break;
                 case "0":
