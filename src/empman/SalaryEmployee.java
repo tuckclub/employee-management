@@ -35,7 +35,8 @@ public class SalaryEmployee extends Employee {
     }
 
     public String toString() {
-        return "SalaryEmployee[id = %s, name = %s, department = %s, salary = %.2f, dailyPay = %.2f, hourlyPay = %.2f]"
-                .formatted(id, name, department, salary, computeDailyPay(), computeHourlyPay());
+        return ("SalaryEmployee[id = %s, name = %s, department = %s, salary = %.2f, hours = %s, "
+                + "dailyPay = %.2f, hourlyPay = %.2f]")
+                .formatted(id, name, department, salary, hours, computeDailyPay(), computeHourlyPay());
     }
 }

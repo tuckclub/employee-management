@@ -7,7 +7,7 @@ public class Main {
         EmployeeManager empman = new EmployeeManager();
         String hr = "----------------------------------------------------------------------------------------";
         boolean exit = false;
-        while (!exit) {
+        while (exit == false) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Menus List");
             System.out.println("[1] Create Employee.");
@@ -66,7 +66,7 @@ public class Main {
                     break;
                 case "0":
                     exit = true;
-                    break;
+                    continue;
             }
             System.out.println(hr);
             System.out.println("Press Enter key to continue...");

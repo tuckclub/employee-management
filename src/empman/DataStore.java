@@ -1,7 +1,6 @@
 package empman;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -66,7 +65,9 @@ public class DataStore {
     }
 
     private Employee lineToEmployee(String line) {
-        if (!line.trim().equals("")) {
+        if (line.trim().equals("")) {
+            return null;
+        } else {
             String[] values = line.split(",");
             int id = Integer.parseInt(values[0]);
             String name = values[1];
@@ -74,8 +75,6 @@ public class DataStore {
             double salary = Double.parseDouble(values[3]);
             double hours = Double.parseDouble(values[4]);
             return new SalaryEmployee(id, name, department, salary, hours);
-        } else {
-            return null;
         }
     }
 
@@ -114,7 +113,7 @@ public class DataStore {
             }
             scanner.close();
             return results;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
             return "";

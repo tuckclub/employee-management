@@ -1,6 +1,5 @@
 package empman;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,15 +39,12 @@ public class EmployeeManager {
     }
 
     private Employee findEmployeeById(int id) {
-        Employee result = null;
-        Iterator<Employee> iterator = employees.iterator();
-        while (result == null && iterator.hasNext()) {
-            Employee employee = iterator.next();
+        for (Employee employee : employees) {
             if (employee.getId() == id) {
-                result = employee;
+                return employee;
             }
         }
-        return result;
+        return null;
     }
 
     public SalaryEmployee addSalaryEmployee() {
