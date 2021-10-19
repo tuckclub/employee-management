@@ -19,6 +19,7 @@ public class Main {
             System.out.println("[6] Edit Employee Pay Rate.");
             System.out.println("[7] Edit Employee Hours of Work.");
             System.out.println("[8] Delete Employee.");
+            System.out.println("[9] Show Employee Records.");
             System.out.println("[0] Exit Program.");
             System.out.print("Select Menu: ");
             String selection = scanner.nextLine();
@@ -74,6 +75,9 @@ public class Main {
                         System.out.println("Employee Deleted: ");
                         System.out.println("\t" + employee8);
                     }
+                    break;
+                case "9":
+                    empman.showEmployeeRecords();
                     break;
                 case "0":
                     exit = true;

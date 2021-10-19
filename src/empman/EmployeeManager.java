@@ -153,4 +153,48 @@ public class EmployeeManager {
         }
         return employee;
     }
+
+    private String tabs = "\t\t\t";
+    private String hr = "========================================================================================";
+
+    public void showEmployeeRecords() {
+        showSalaryEmployeeRecords();
+        showHourlyEmployeeRecords();
+    }
+
+    public void showSalaryEmployeeRecords() {
+        System.out.println();
+        System.out.println("Salary Employee Records");
+        System.out.println(hr);
+        System.out.println("ID" + tabs + "Name" + tabs + "Department" + tabs + "Salary" + tabs + "Pay");
+        for (Employee emp : employees) {
+            if (emp instanceof SalaryEmployee) {
+                SalaryEmployee sal = (SalaryEmployee) emp;
+                System.out.printf(
+                        sal.getId() + tabs + sal.getName() + tabs + sal.getDepartment() + tabs
+                                + sal.getSalary() + tabs + "%.2f\n",
+                        sal.computePay()
+                );
+            }
+        }
+        System.out.println(hr);
+    }
+
+    public void showHourlyEmployeeRecords() {
+        System.out.println();
+        System.out.println("Hourly Employee Records");
+        System.out.println(hr);
+        System.out.println("ID" + tabs + "Name" + tabs + "Department" + tabs + "Rate" + tabs + "Hours" + tabs + "Pay");
+        for (Employee emp : employees) {
+            if (emp instanceof HourlyEmployee) {
+                HourlyEmployee hrl = (HourlyEmployee) emp;
+                System.out.printf(
+                        hrl.getId() + tabs + hrl.getName() + tabs + hrl.getDepartment() + tabs +
+                                hrl.getRate() + tabs + hrl.getHours() + tabs + "%.2f\n",
+                        hrl.computePay()
+                );
+            }
+        }
+        System.out.println(hr);
+    }
 }
