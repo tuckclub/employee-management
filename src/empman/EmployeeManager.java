@@ -1,13 +1,17 @@
 package empman;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeManager {
-    private List<Employee> employees = new ArrayList<Employee>();
+    private DataStore dataStore = new DataStore("data.txt");
+    private List<Employee> employees = dataStore.readEmployees();
     private Scanner scanner = new Scanner(System.in);
+
+    private void writeFile() {
+        dataStore.writeEmployees(employees);
+    }
 
     private String intputText(String label) {
         System.out.print(label);
@@ -54,6 +58,7 @@ public class EmployeeManager {
         int id = getNextEmployeeId();
         SalaryEmployee employee = new SalaryEmployee(id, name, department, salary);
         employees.add(employee);
+        writeFile();
         return employee;
     }
 
@@ -65,6 +70,7 @@ public class EmployeeManager {
         int id = getNextEmployeeId();
         HourlyEmployee employee = new HourlyEmployee(id, name, department, rate, hours);
         employees.add(employee);
+        writeFile();
         return employee;
     }
 
@@ -74,6 +80,7 @@ public class EmployeeManager {
         if (employee != null) {
             String newName = intputText("Enter New Name: ");
             employee.setName(newName);
+            writeFile();
         } else {
             System.out.println("Employee ID Not Found.");
         }
@@ -86,6 +93,7 @@ public class EmployeeManager {
         if (employee != null) {
             String newDepartment = intputText("Enter New Department: ");
             employee.setDepartment(newDepartment);
+            writeFile();
         } else {
             System.out.println("Employee ID Not Found.");
         }
@@ -102,6 +110,7 @@ public class EmployeeManager {
             SalaryEmployee salaryEmployee = (SalaryEmployee) employee;
             double newSalary = inputDouble("Enter New Salary: ");
             salaryEmployee.setSalary(newSalary);
+            writeFile();
             return salaryEmployee;
         } else {
             System.out.println("Employee Does Not Have Salary.");
@@ -119,6 +128,7 @@ public class EmployeeManager {
             HourlyEmployee hourlyEmployee = (HourlyEmployee) employee;
             double newRate = inputDouble("Enter New Pay Rate: ");
             hourlyEmployee.setRate(newRate);
+            writeFile();
             return hourlyEmployee;
         } else {
             System.out.println("Employee Does Not Have Pay Rate.");
@@ -136,6 +146,7 @@ public class EmployeeManager {
             HourlyEmployee hourlyEmployee = (HourlyEmployee) employee;
             double newHours = inputDouble("Enter New Hours of Work: ");
             hourlyEmployee.setHours(newHours);
+            writeFile();
             return hourlyEmployee;
         } else {
             System.out.println("Employee Does Not Have Hours of Work.");
@@ -148,6 +159,7 @@ public class EmployeeManager {
         Employee employee = findEmployeeById(id);
         if (employee != null) {
             employees.remove(employee);
+            writeFile();
         } else {
             System.out.println("Employee ID Not Found.");
         }
