@@ -2,10 +2,12 @@ package empman;
 
 public class SalaryEmployee extends Employee {
     private double salary;
+    private double hours;
 
-    public SalaryEmployee(int id, String name, String department, double salary) {
+    public SalaryEmployee(int id, String name, String department, double salary, double hours) {
         super(id, name, department);
         this.salary = salary;
+        this.hours = hours;
     }
 
     public double getSalary() {
@@ -16,20 +18,24 @@ public class SalaryEmployee extends Employee {
         this.salary = salary;
     }
 
-    public String getName() {
-        return name;
+    public double getHours() {
+        return hours;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHours(double hours) {
+        this.hours = hours;
     }
 
-    public double computePay() {
-        return (salary / 52);
+    public double computeDailyPay() {
+        return salary / 30;
+    }
+
+    public double computeHourlyPay() {
+        return salary / 30 / hours;
     }
 
     public String toString() {
-        return "SalaryEmployee[id = %s, name = %s, department = %s, salary = %.2f]"
-                .formatted(id, name, department, salary);
+        return "SalaryEmployee[id = %s, name = %s, department = %s, salary = %.2f, dailyPay = %.2f, hourlyPay = %.2f]"
+                .formatted(id, name, department, salary, computeDailyPay(), computeHourlyPay());
     }
 }

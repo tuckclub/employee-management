@@ -41,20 +41,12 @@ public class DataStore {
     private String employeeToLine(Employee employee) {
         if (employee instanceof SalaryEmployee) {
             SalaryEmployee sal = (SalaryEmployee) employee;
-            return "s,%d,%s,%s,%.2f\n".formatted(
+            return "%d,%s,%s,%.2f,%.2f\n".formatted(
                     sal.getId(),
                     sal.getName(),
                     sal.getDepartment(),
-                    sal.getSalary()
-            );
-        } else if (employee instanceof HourlyEmployee) {
-            HourlyEmployee hrl = (HourlyEmployee) employee;
-            return "h,%d,%s,%s,%.2f,%.2f\n".formatted(
-                    hrl.getId(),
-                    hrl.getName(),
-                    hrl.getDepartment(),
-                    hrl.getRate(),
-                    hrl.getHours()
+                    sal.getSalary(),
+                    sal.getHours()
             );
         } else {
             return null;
@@ -74,21 +66,14 @@ public class DataStore {
     }
 
     private Employee lineToEmployee(String line) {
-        if (line.startsWith("s")) {
+        if (!line.trim().equals("")) {
             String[] values = line.split(",");
-            int id = Integer.parseInt(values[1]);
-            String name = values[2];
-            String department = values[3];
-            double salary = Double.parseDouble(values[4]);
-            return new SalaryEmployee(id, name, department, salary);
-        } else if (line.startsWith("h")) {
-            String[] values = line.split(",");
-            int id = Integer.parseInt(values[1]);
-            String name = values[2];
-            String department = values[3];
-            double rate = Double.parseDouble(values[4]);
-            double hours = Double.parseDouble(values[5]);
-            return new HourlyEmployee(id, name, department, rate, hours);
+            int id = Integer.parseInt(values[0]);
+            String name = values[1];
+            String department = values[2];
+            double salary = Double.parseDouble(values[3]);
+            double hours = Double.parseDouble(values[4]);
+            return new SalaryEmployee(id, name, department, salary, hours);
         } else {
             return null;
         }

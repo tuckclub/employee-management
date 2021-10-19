@@ -34,6 +34,4 @@ public abstract class Employee {
     public void setDepartment(String department) {
         this.department = department;
     }
-
-    public abstract double computePay();
 }
