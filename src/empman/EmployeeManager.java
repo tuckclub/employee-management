@@ -145,13 +145,13 @@ public class EmployeeManager {
         System.out.println("Salary Employee Records");
         System.out.println(hr);
         System.out.println("ID" + tabs + "Name" + tabs + "Department" + tabs
-                + "Salary" + tabs + "Daily Pay" + tabs + "Hourly Pay");
+                + "Salary" + tabs + "Hours" + tabs + "Daily Pay" + tabs + "Hourly Pay");
         for (Employee emp : employees) {
             if (emp instanceof SalaryEmployee) {
                 SalaryEmployee sal = (SalaryEmployee) emp;
                 System.out.printf(
                         sal.getId() + tabs + sal.getName() + tabs + sal.getDepartment() + tabs
-                                + sal.getSalary() + tabs + "%.2f" + tabs + "%.2f\n",
+                                + sal.getSalary() + tabs + sal.getHours() + tabs + "%.2f" + tabs + "%.2f\n",
                         sal.computeDailyPay(), sal.computeHourlyPay()
                 );
             }
