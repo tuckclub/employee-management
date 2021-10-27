@@ -40,12 +40,13 @@ public class DataStore {
     private String employeeToLine(Employee employee) {
         if (employee instanceof SalaryEmployee) {
             SalaryEmployee sal = (SalaryEmployee) employee;
-            return "%d,%s,%s,%.2f,%.2f\n".formatted(
-                    sal.getId(),
-                    sal.getName(),
-                    sal.getDepartment(),
-                    sal.getSalary(),
-                    sal.getHours()
+            return "%d,%s,%s,%.2f,%.2f,%.2f\n".formatted(
+                sal.getId(),
+                sal.getName(),
+                sal.getDepartment(),
+                sal.getSalary(),
+                sal.getOtHourlyWage(),
+                sal.getCurrentMonthOtHours()
             );
         } else {
             return null;
@@ -73,8 +74,9 @@ public class DataStore {
             String name = values[1];
             String department = values[2];
             double salary = Double.parseDouble(values[3]);
-            double hours = Double.parseDouble(values[4]);
-            return new SalaryEmployee(id, name, department, salary, hours);
+            double otHourlyWage = Double.parseDouble(values[4]);
+            double currentMonthOtHours = Double.parseDouble(values[5]);
+            return new SalaryEmployee(id, name, department, salary, otHourlyWage, currentMonthOtHours);
         }
     }
 

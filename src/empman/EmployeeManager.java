@@ -51,9 +51,10 @@ public class EmployeeManager {
         String name = intputText("Enter Employee Name: ");
         String department = intputText("Enter Employee Department: ");
         double salary = inputDouble("Enter Employee Salary: ");
-        double hours = inputDouble("Enter Employee Hours of Work: ");
+        double otHourlyWage = inputDouble("Enter Employee OT Hourly Wage: ");
+        double currentMonthOtHours = inputDouble("Enter Employee Current Month OT Hours: ");
         int id = getNextEmployeeId();
-        SalaryEmployee employee = new SalaryEmployee(id, name, department, salary, hours);
+        SalaryEmployee employee = new SalaryEmployee(id, name, department, salary, otHourlyWage, currentMonthOtHours);
         employees.add(employee);
         writeFile();
         return employee;
@@ -112,7 +113,7 @@ public class EmployeeManager {
         } else if (employee instanceof SalaryEmployee) {
             SalaryEmployee salaryEmployee = (SalaryEmployee) employee;
             double newHours = inputDouble("Enter New Hours of Work: ");
-            salaryEmployee.setHours(newHours);
+            salaryEmployee.setCurrentMonthOtHours(newHours);
             writeFile();
             return salaryEmployee;
         } else {
@@ -141,14 +142,14 @@ public class EmployeeManager {
         System.out.println("Salary Employee Records");
         System.out.println(hr);
         System.out.println("ID" + tabs + "Name" + tabs + "Department" + tabs
-                + "Salary" + tabs + "Hours" + tabs + "Daily Pay" + tabs + "Hourly Pay");
+            + "Salary" + tabs + "Hours" + tabs + "Daily Pay" + tabs + "Hourly Pay");
         for (Employee emp : employees) {
             if (emp instanceof SalaryEmployee) {
                 SalaryEmployee sal = (SalaryEmployee) emp;
                 System.out.printf(
-                        sal.getId() + tabs + sal.getName() + tabs + sal.getDepartment() + tabs
-                                + sal.getSalary() + tabs + sal.getHours() + tabs + "%.2f" + tabs + "%.2f\n",
-                        sal.computeDailyPay(), sal.computeHourlyPay()
+                    sal.getId() + tabs + sal.getName() + tabs + sal.getDepartment() + tabs
+                        + sal.getSalary() + tabs + sal.getCurrentMonthOtHours() + tabs + "%.2f" + tabs + "%.2f\n",
+                    sal.computeDailyPay(), sal.computeHourlyPay()
                 );
             }
         }
