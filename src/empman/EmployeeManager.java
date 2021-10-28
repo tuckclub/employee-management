@@ -106,20 +106,20 @@ public class EmployeeManager {
         }
     }
 
-    public void editEmployeeHoursOfWork() {
+    public void editEmployeeCurrentMonthOtHours() {
         int id = inputInt("Enter Employee ID: ");
         Employee employee = findEmployeeById(id);
         if (employee == null) {
             System.out.println("Employee ID Not Found.");
         } else if (employee instanceof SalaryEmployee) {
             SalaryEmployee salaryEmployee = (SalaryEmployee) employee;
-            double newHours = inputDouble("Enter New Hours of Work: ");
-            salaryEmployee.setCurrentMonthOtHours(newHours);
+            double newOtHours = inputDouble("Enter New Current Month OT Hours: ");
+            salaryEmployee.setCurrentMonthOtHours(newOtHours);
             writeFile();
-            System.out.println("Employee Hours of Work Edited: ");
+            System.out.println("Employee Current Month OT Hours Edited: ");
             System.out.println("\t" + employee);
         } else {
-            System.out.println("Employee Does Not Have Hours of Work.");
+            System.out.println("Employee Does Not Have Current Month OT Hours.");
         }
     }
 
