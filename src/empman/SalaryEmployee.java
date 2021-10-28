@@ -37,17 +37,9 @@ public class SalaryEmployee extends Employee {
         this.currentMonthOtHours = currentMonthOtHours;
     }
 
-    public double computeDailyPay() {
-        return salary / 30;
-    }
-
-    public double computeHourlyPay() {
-        return salary / 30 / currentMonthOtHours;
-    }
-
     public String toString() {
-        return ("SalaryEmployee[id = %s, name = %s, department = %s, salary = %.2f, hours = %s, "
-            + "dailyPay = %.2f, hourlyPay = %.2f]")
-            .formatted(id, name, department, salary, currentMonthOtHours, computeDailyPay(), computeHourlyPay());
+        String template = "SalaryEmployee[id = %s, name = %s, department = %s, salary = %.2f, "
+            + "otHourlyWage = %.2f, currentMonthOtHours = %.2f]";
+        return template.formatted(id, name, department, salary, otHourlyWage, currentMonthOtHours);
     }
 }
