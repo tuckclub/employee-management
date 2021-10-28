@@ -136,25 +136,38 @@ public class EmployeeManager {
         }
     }
 
-    private String tabs = "\t\t\t";
-    private String hr = "========================================================================================";
+    private int lineLength = 5 + 20 + 15 + 15 + 20 + 30;
+    private String thinLine = "-".repeat(lineLength);
+    private String thickLine = "=".repeat(lineLength);
 
     public void showEmployeeRecords() {
         System.out.println();
-        System.out.println("Salary Employee Records");
-        System.out.println(hr);
-        System.out.println("ID" + tabs + "Name" + tabs + "Department" + tabs
-            + "Salary" + tabs + "Hours" + tabs + "Daily Pay" + tabs + "Hourly Pay");
+        System.out.println("Employee Records");
+        System.out.println(thickLine);
+        System.out.printf(
+            "%5s%20s%15s%15s%20s%30s\n",
+            "ID",
+            "Name",
+            "Department",
+            "Salary",
+            "OT Hourly Wage",
+            "Current Month OT Hours"
+        );
+        System.out.println(thinLine);
         for (Employee emp : employees) {
             if (emp instanceof SalaryEmployee) {
                 SalaryEmployee sal = (SalaryEmployee) emp;
                 System.out.printf(
-                    sal.getId() + tabs + sal.getName() + tabs + sal.getDepartment() + tabs
-                        + sal.getSalary() + tabs + sal.getCurrentMonthOtHours() + tabs + "%.2f" + tabs + "%.2f\n",
-                    sal.computeDailyPay(), sal.computeHourlyPay()
+                    "%5d%20s%15s%15.2f%20.2f%30.2f\n",
+                    sal.getId(),
+                    sal.getName(),
+                    sal.getDepartment(),
+                    sal.getSalary(),
+                    sal.getOtHourlyWage(),
+                    sal.getCurrentMonthOtHours()
                 );
             }
         }
-        System.out.println(hr);
+        System.out.println(thickLine);
     }
 }
