@@ -47,7 +47,7 @@ public class EmployeeManager {
         return null;
     }
 
-    public SalaryEmployee addSalaryEmployee() {
+    public void addSalaryEmployee() {
         String name = intputText("Enter Employee Name: ");
         String department = intputText("Enter Employee Department: ");
         double salary = inputDouble("Enter Employee Salary: ");
@@ -57,81 +57,83 @@ public class EmployeeManager {
         SalaryEmployee employee = new SalaryEmployee(id, name, department, salary, otHourlyWage, currentMonthOtHours);
         employees.add(employee);
         writeFile();
-        return employee;
+        System.out.println("Salary Employee Created: ");
+        System.out.println("\t" + employee);
     }
 
-    public Employee editEmployeeName() {
+    public void editEmployeeName() {
         int id = inputInt("Enter Employee ID: ");
         Employee employee = findEmployeeById(id);
         if (employee != null) {
             String newName = intputText("Enter New Name: ");
             employee.setName(newName);
             writeFile();
+            System.out.println("Employee Name Edited: ");
+            System.out.println("\t" + employee);
         } else {
             System.out.println("Employee ID Not Found.");
         }
-        return employee;
     }
 
-    public Employee editEmployeeDepartment() {
+    public void editEmployeeDepartment() {
         int id = inputInt("Enter Employee ID: ");
         Employee employee = findEmployeeById(id);
         if (employee != null) {
             String newDepartment = intputText("Enter New Department: ");
             employee.setDepartment(newDepartment);
             writeFile();
+            System.out.println("Employee Department Edited: ");
+            System.out.println("\t" + employee);
         } else {
             System.out.println("Employee ID Not Found.");
         }
-        return employee;
     }
 
-    public SalaryEmployee editEmployeeSalary() {
+    public void editEmployeeSalary() {
         int id = inputInt("Enter Employee ID: ");
         Employee employee = findEmployeeById(id);
         if (employee == null) {
             System.out.println("Employee ID Not Found.");
-            return null;
         } else if (employee instanceof SalaryEmployee) {
             SalaryEmployee salaryEmployee = (SalaryEmployee) employee;
             double newSalary = inputDouble("Enter New Salary: ");
             salaryEmployee.setSalary(newSalary);
             writeFile();
-            return salaryEmployee;
+            System.out.println("Employee Salary Edited: ");
+            System.out.println("\t" + employee);
         } else {
             System.out.println("Employee Does Not Have Salary.");
-            return null;
         }
     }
 
-    public SalaryEmployee editEmployeeHoursOfWork() {
+    public void editEmployeeHoursOfWork() {
         int id = inputInt("Enter Employee ID: ");
         Employee employee = findEmployeeById(id);
         if (employee == null) {
             System.out.println("Employee ID Not Found.");
-            return null;
         } else if (employee instanceof SalaryEmployee) {
             SalaryEmployee salaryEmployee = (SalaryEmployee) employee;
             double newHours = inputDouble("Enter New Hours of Work: ");
             salaryEmployee.setCurrentMonthOtHours(newHours);
             writeFile();
-            return salaryEmployee;
+            System.out.println("Employee Hours of Work Edited: ");
+            System.out.println("\t" + employee);
         } else {
             System.out.println("Employee Does Not Have Hours of Work.");
-            return null;
         }
     }
 
-    public Employee deleteEmployee() {
+    public void deleteEmployee() {
         int id = inputInt("Enter Employee ID: ");
         Employee employee = findEmployeeById(id);
         if (employee != null) {
             employees.remove(employee);
             writeFile();
+            System.out.println("Employee Deleted: ");
+            System.out.println("\t" + employee);
         } else {
             System.out.println("Employee ID Not Found.");
         }
-        return employee;
     }
 
     private String tabs = "\t\t\t";

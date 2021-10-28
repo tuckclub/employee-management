@@ -21,52 +21,17 @@ public class Main {
             System.out.print("Select Menu: ");
             String selection = scanner.nextLine();
             switch (selection) {
-                case "1":
-                    SalaryEmployee employee1 = empman.addSalaryEmployee();
-                    System.out.println("Salary Employee Created: ");
-                    System.out.println("\t" + employee1);
-                    break;
-                case "2":
-                    Employee employee2 = empman.editEmployeeName();
-                    if (employee2 != null) {
-                        System.out.println("Employee Name Edited: ");
-                        System.out.println("\t" + employee2);
-                    }
-                    break;
-                case "3":
-                    Employee employee3 = empman.editEmployeeDepartment();
-                    if (employee3 != null) {
-                        System.out.println("Employee Department Edited: ");
-                        System.out.println("\t" + employee3);
-                    }
-                    break;
-                case "4":
-                    Employee employee4 = empman.editEmployeeSalary();
-                    if (employee4 != null) {
-                        System.out.println("Employee Salary Edited: ");
-                        System.out.println("\t" + employee4);
-                    }
-                    break;
-                case "5":
-                    Employee employee5 = empman.editEmployeeHoursOfWork();
-                    if (employee5 != null) {
-                        System.out.println("Employee Hours of Work Edited: ");
-                        System.out.println("\t" + employee5);
-                    }
-                    break;
-                case "6":
-                    Employee employee6 = empman.deleteEmployee();
-                    if (employee6 != null) {
-                        System.out.println("Employee Deleted: ");
-                        System.out.println("\t" + employee6);
-                    }
-                    break;
-                case "7":
-                    empman.showEmployeeRecords();
-                    break;
-                case "0":
+                case "1" -> empman.addSalaryEmployee();
+                case "2" -> empman.editEmployeeName();
+                case "3" -> empman.editEmployeeDepartment();
+                case "4" -> empman.editEmployeeSalary();
+                case "5" -> empman.editEmployeeHoursOfWork();
+                case "6" -> empman.deleteEmployee();
+                case "7" -> empman.showEmployeeRecords();
+                case "0" -> {
                     exit = true;
                     continue;
+                }
             }
             System.out.println(hr);
             System.out.println("Press Enter key to continue...");
