@@ -6,19 +6,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class DataStore {
     private Gson gson = new Gson();
-    private String fileName;
+    private String employeesFileName;
+    private String payslipsFileName;
 
-    public DataStore(String fileName) {
-        this.fileName = fileName;
+    public DataStore(String employeesFileName, String payslipsFileName) {
+        this.employeesFileName = employeesFileName;
+        this.payslipsFileName = payslipsFileName;
     }
 
     public void writeEmployees(List<Employee> employees) {
-        try (FileWriter writer = new FileWriter(fileName)) {
+        try (FileWriter writer = new FileWriter(employeesFileName)) {
             gson.toJson(employees, writer);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -26,11 +28,32 @@ public class DataStore {
     }
 
     public List<Employee> readEmployees() {
-        try (FileReader reader = new FileReader(fileName)) {
-            Employee[] array = gson.fromJson(reader, Employee[].class);
-            return Arrays.asList(array);
+        try (FileReader reader = new FileReader(employeesFileName)) {
+            Employee[] array = gson.fromJson(reader, SalaryEmployee[].class);
+            List<Employee> list = new ArrayList<Employee>();
+            Collections.addAll(list, array);
+            return list;
         } catch (IOException e) {
             return new ArrayList<Employee>();
+        }
+    }
+
+    public void writePayslips(List<Payslip> payslips) {
+        try (FileWriter writer = new FileWriter(payslipsFileName)) {
+            gson.toJson(payslips, writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Payslip> readPayslips() {
+        try (FileReader reader = new FileReader(payslipsFileName)) {
+            Payslip[] array = gson.fromJson(reader, Payslip[].class);
+            List<Payslip> list = new ArrayList<Payslip>();
+            Collections.addAll(list, array);
+            return list;
+        } catch (IOException e) {
+            return new ArrayList<Payslip>();
         }
     }
 }

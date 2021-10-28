@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeManager {
-    private DataStore dataStore = new DataStore("data-employees.json");
+    private DataStore dataStore = new DataStore("data-employees.json", "data-payslips.json");
     private List<Employee> employees = dataStore.readEmployees();
+    private List<Payslip> payslips = dataStore.readPayslips();
     private Scanner scanner = new Scanner(System.in);
 
-    private void writeFile() {
-        dataStore.writeEmployees(employees);
-    }
+    // Section 1: User Input Operations
 
     private String intputText(String label) {
         System.out.print(label);
@@ -25,6 +24,12 @@ public class EmployeeManager {
     private double inputDouble(String label) {
         String text = intputText(label);
         return Double.parseDouble(text);
+    }
+
+    // Section 2: Employee Operations
+
+    private void writeEmployees() {
+        dataStore.writeEmployees(employees);
     }
 
     private int getNextEmployeeId() {
@@ -56,7 +61,7 @@ public class EmployeeManager {
         int id = getNextEmployeeId();
         SalaryEmployee employee = new SalaryEmployee(id, name, department, salary, otHourlyWage, currentMonthOtHours);
         employees.add(employee);
-        writeFile();
+        writeEmployees();
         System.out.println("Salary Employee Created: ");
         System.out.println("\t" + employee);
     }
@@ -67,7 +72,7 @@ public class EmployeeManager {
         if (employee != null) {
             String newName = intputText("Enter New Name: ");
             employee.setName(newName);
-            writeFile();
+            writeEmployees();
             System.out.println("Employee Name Edited: ");
             System.out.println("\t" + employee);
         } else {
@@ -81,7 +86,7 @@ public class EmployeeManager {
         if (employee != null) {
             String newDepartment = intputText("Enter New Department: ");
             employee.setDepartment(newDepartment);
-            writeFile();
+            writeEmployees();
             System.out.println("Employee Department Edited: ");
             System.out.println("\t" + employee);
         } else {
@@ -98,7 +103,7 @@ public class EmployeeManager {
             SalaryEmployee salaryEmployee = (SalaryEmployee) employee;
             double newSalary = inputDouble("Enter New Salary: ");
             salaryEmployee.setSalary(newSalary);
-            writeFile();
+            writeEmployees();
             System.out.println("Employee Salary Edited: ");
             System.out.println("\t" + employee);
         } else {
@@ -115,7 +120,7 @@ public class EmployeeManager {
             SalaryEmployee salaryEmployee = (SalaryEmployee) employee;
             double newOtHourlyWage = inputDouble("Enter New OT Hourly Wage: ");
             salaryEmployee.setOtHourlyWage(newOtHourlyWage);
-            writeFile();
+            writeEmployees();
             System.out.println("Employee OT Hourly Wage Edited: ");
             System.out.println("\t" + employee);
         } else {
@@ -132,7 +137,7 @@ public class EmployeeManager {
             SalaryEmployee salaryEmployee = (SalaryEmployee) employee;
             double newOtHours = inputDouble("Enter New Current Month OT Hours: ");
             salaryEmployee.setCurrentMonthOtHours(newOtHours);
-            writeFile();
+            writeEmployees();
             System.out.println("Employee Current Month OT Hours Edited: ");
             System.out.println("\t" + employee);
         } else {
@@ -145,7 +150,7 @@ public class EmployeeManager {
         Employee employee = findEmployeeById(id);
         if (employee != null) {
             employees.remove(employee);
-            writeFile();
+            writeEmployees();
             System.out.println("Employee Deleted: ");
             System.out.println("\t" + employee);
         } else {
@@ -153,11 +158,10 @@ public class EmployeeManager {
         }
     }
 
-    private int lineLength = 5 + 20 + 15 + 15 + 20 + 30;
-    private String thinLine = "-".repeat(lineLength);
-    private String thickLine = "=".repeat(lineLength);
-
     public void showEmployeeRecords() {
+        int lineLength = 5 + 20 + 15 + 15 + 20 + 30;
+        String thinLine = "-".repeat(lineLength);
+        String thickLine = "=".repeat(lineLength);
         System.out.println();
         System.out.println("Employee Records");
         System.out.println(thickLine);
@@ -186,5 +190,69 @@ public class EmployeeManager {
             }
         }
         System.out.println(thickLine);
+    }
+
+    // Section 3: Payslip Operations
+
+    private void writePayslips() {
+        dataStore.writePayslips(payslips);
+    }
+
+    private int[] inputMonthAndYear(String label) {
+        while (true) {
+            String monthAndYearText = intputText(label);
+            String[] parts = monthAndYearText.split("/");
+            try {
+                int month = Integer.parseInt(parts[0]);
+                int year = Integer.parseInt(parts[1]);
+                if (month >= 1 && month <= 12 && year >= 1000 && year <= 9999) {
+                    int[] monthAndYear = new int[2];
+                    monthAndYear[0] = month;
+                    monthAndYear[1] = year;
+                    return monthAndYear;
+                }
+            } catch (Exception e) {
+                System.out.println("*** Invalid Month/Year Format. Please Enter Again. ***");
+            }
+        }
+    }
+
+    private Payslip findPayslip(int employeeId, int month, int year) {
+        for (Payslip payslip : payslips) {
+            if (payslip.getEmployeeId() == employeeId && payslip.getMonth() == month && payslip.getYear() == year) {
+                return payslip;
+            }
+        }
+        return null;
+    }
+
+    public void createPayslip() {
+        int id = inputInt("Enter Employee ID: ");
+        Employee employee = findEmployeeById(id);
+        if (employee instanceof SalaryEmployee) {
+            SalaryEmployee sal = (SalaryEmployee) employee;
+            int[] monthAndYear = inputMonthAndYear("Enter Current Month/Year (e.g. 1/2021): ");
+            int month = monthAndYear[0];
+            int year = monthAndYear[1];
+            Payslip existingPayslip = findPayslip(employee.getId(), month, year);
+            if (existingPayslip == null) {
+                Payslip newPayslip = new Payslip(
+                    sal.getId(),
+                    sal.getName(),
+                    sal.getDepartment(),
+                    sal.getSalary(),
+                    sal.getOtHourlyWage(),
+                    sal.getCurrentMonthOtHours(),
+                    month,
+                    year
+                );
+                payslips.add(newPayslip);
+                writePayslips();
+            } else {
+                System.out.println("*** Payslip Already Exists. Cannot Create A New One. ***");
+            }
+        } else {
+            System.out.println("Employee ID Not Found.");
+        }
     }
 }
