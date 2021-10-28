@@ -106,6 +106,23 @@ public class EmployeeManager {
         }
     }
 
+    public void editEmployeeOtHourlyWage() {
+        int id = inputInt("Enter Employee ID: ");
+        Employee employee = findEmployeeById(id);
+        if (employee == null) {
+            System.out.println("Employee ID Not Found.");
+        } else if (employee instanceof SalaryEmployee) {
+            SalaryEmployee salaryEmployee = (SalaryEmployee) employee;
+            double newOtHourlyWage = inputDouble("Enter New OT Hourly Wage: ");
+            salaryEmployee.setOtHourlyWage(newOtHourlyWage);
+            writeFile();
+            System.out.println("Employee OT Hourly Wage Edited: ");
+            System.out.println("\t" + employee);
+        } else {
+            System.out.println("Employee Does Not Have OT Hourly Wage.");
+        }
+    }
+
     public void editEmployeeCurrentMonthOtHours() {
         int id = inputInt("Enter Employee ID: ");
         Employee employee = findEmployeeById(id);

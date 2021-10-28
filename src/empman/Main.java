@@ -13,9 +13,10 @@ public class Main {
             System.out.println("[2] Edit Employee Name.");
             System.out.println("[3] Edit Employee Department.");
             System.out.println("[4] Edit Employee Salary.");
-            System.out.println("[5] Edit Employee Current Month OT Hours.");
-            System.out.println("[6] Delete Employee.");
-            System.out.println("[7] Show Employee Records.");
+            System.out.println("[5] Edit Employee OT Hourly Wage.");
+            System.out.println("[6] Edit Employee Current Month OT Hours.");
+            System.out.println("[7] Delete Employee.");
+            System.out.println("[8] Show Employee Records.");
             System.out.println("[0] Exit Program.");
             System.out.print("Select Menu: ");
             String selection = scanner.nextLine();
@@ -24,9 +25,10 @@ public class Main {
                 case "2" -> empman.editEmployeeName();
                 case "3" -> empman.editEmployeeDepartment();
                 case "4" -> empman.editEmployeeSalary();
-                case "5" -> empman.editEmployeeCurrentMonthOtHours();
-                case "6" -> empman.deleteEmployee();
-                case "7" -> empman.showEmployeeRecords();
+                case "5" -> empman.editEmployeeOtHourlyWage();
+                case "6" -> empman.editEmployeeCurrentMonthOtHours();
+                case "7" -> empman.deleteEmployee();
+                case "8" -> empman.showEmployeeRecords();
                 case "0" -> {
                     exit = true;
                     continue;
