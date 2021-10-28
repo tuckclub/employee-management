@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         EmployeeManager empman = new EmployeeManager();
-        String hr = "----------------------------------------------------------------------------------------";
         boolean exit = false;
         while (exit == false) {
             Scanner scanner = new Scanner(System.in);
@@ -32,9 +31,13 @@ public class Main {
                     exit = true;
                     continue;
                 }
+                default -> {
+                    System.out.println("*** Please Select A Valid Memu Item. ***");
+                    continue;
+                }
             }
-            System.out.println(hr);
-            System.out.println("Press Enter key to continue...");
+            System.out.println("#".repeat(50));
+            System.out.print("Press Enter key to continue...");
             scanner.nextLine();
         }
     }
