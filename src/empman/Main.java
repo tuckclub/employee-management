@@ -9,16 +9,17 @@ public class Main {
         while (exit == false) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Menus List");
-            System.out.println("[1] Create Employee.");
-            System.out.println("[2] Edit Employee Name.");
-            System.out.println("[3] Edit Employee Department.");
-            System.out.println("[4] Edit Employee Salary.");
-            System.out.println("[5] Edit Employee OT Hourly Wage.");
-            System.out.println("[6] Edit Employee Current Month OT Hours.");
-            System.out.println("[7] Delete Employee.");
-            System.out.println("[8] Show Employee Records.");
-            System.out.println("[9] Create Payslip.");
-            System.out.println("[0] Exit Program.");
+            System.out.println(" [1] Create Employee.");
+            System.out.println(" [2] Edit Employee Name.");
+            System.out.println(" [3] Edit Employee Department.");
+            System.out.println(" [4] Edit Employee Salary.");
+            System.out.println(" [5] Edit Employee OT Hourly Wage.");
+            System.out.println(" [6] Edit Employee Current Month OT Hours.");
+            System.out.println(" [7] Delete Employee.");
+            System.out.println(" [8] Show Employee Records.");
+            System.out.println(" [9] Create Payslip.");
+            System.out.println("[10] Show Payslips.");
+            System.out.println(" [0] Exit Program.");
             System.out.print("Select Menu: ");
             String selection = scanner.nextLine();
             switch (selection) {
@@ -31,6 +32,7 @@ public class Main {
                 case "7" -> empman.deleteEmployee();
                 case "8" -> empman.showEmployeeRecords();
                 case "9" -> empman.createPayslip();
+                case "10" -> empman.showPayslips();
                 case "0" -> {
                     exit = true;
                     continue;
@@ -41,7 +43,7 @@ public class Main {
                 }
             }
             System.out.println("#".repeat(50));
-            System.out.print("Press Enter key to continue...");
+            System.out.print("Press Enter Key To Continue...");
             scanner.nextLine();
         }
     }

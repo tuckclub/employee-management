@@ -255,4 +255,53 @@ public class EmployeeManager {
             System.out.println("Employee ID Not Found.");
         }
     }
+
+    public void showPayslips() {
+        Payslip payslip = payslips.get(0);
+        showPayslip(payslip);
+    }
+
+    private void showPayslip(Payslip payslip) {
+        int lineLength = 20 + 50 + 30;
+        String thinLine = "-".repeat(lineLength);
+        String thickLine = "=".repeat(lineLength);
+        System.out.println();
+        System.out.println(thickLine);
+        System.out.printf("Payslip For The Month Of %s %d\n", getMonthName(payslip.getMonth()), payslip.getYear());
+        System.out.printf("Employee ID:   %04d\n", payslip.getEmployeeId());
+        System.out.printf("Employee Name: %s\n", payslip.getEmployeeName());
+        System.out.println(thinLine);
+        System.out.printf("%20s%50s%30s\n", "Earnings", "Details", "Amount");
+        System.out.println(thinLine);
+        double salary = payslip.getSalary();
+        double otRate = payslip.getOtHourlyWage();
+        double otHours = payslip.getCurrentMonthOtHours();
+        double ot = otRate * otHours;
+        double total = salary + ot;
+        String salaryDetails = "1 Month";
+        String otDetails = "Rate: %,.2f, Hours: %,.2f".formatted(otRate, otHours);
+        System.out.printf("%20s%50s%,30.2f\n", "Salary", salaryDetails, salary);
+        System.out.printf("%20s%50s%,30.2f\n", "OT", otDetails, ot);
+        System.out.println(thinLine);
+        System.out.printf("%70s%,30.2f\n", "Total", total);
+        System.out.println(thickLine);
+    }
+
+    private String getMonthName(int month) {
+        String[] names = {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        };
+        return names[month - 1];
+    }
 }
