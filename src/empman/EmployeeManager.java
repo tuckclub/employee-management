@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeManager {
-    private DataStore dataStore = new DataStore("data.txt");
+    private DataStore dataStore = new DataStore("data-employees.json");
     private List<Employee> employees = dataStore.readEmployees();
     private Scanner scanner = new Scanner(System.in);
 
