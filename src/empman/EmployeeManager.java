@@ -210,25 +210,6 @@ public class EmployeeManager {
         dataStore.writePayslips(allPayslips);
     }
 
-    private int[] inputMonthAndYear(String label) {
-        while (true) {
-            String monthAndYearText = intputText(label);
-            String[] parts = monthAndYearText.split("/");
-            try {
-                int month = Integer.parseInt(parts[0]);
-                int year = Integer.parseInt(parts[1]);
-                if (month >= 1 && month <= 12 && year >= 1000 && year <= 9999) {
-                    int[] monthAndYear = new int[2];
-                    monthAndYear[0] = month;
-                    monthAndYear[1] = year;
-                    return monthAndYear;
-                }
-            } catch (Exception e) {
-                System.out.println("*** Invalid Month/Year Format. Please Enter Again. ***");
-            }
-        }
-    }
-
     private Payslip findPayslip(int employeeId, int month, int year) {
         for (Payslip payslip : allPayslips) {
             if (payslip.getEmployeeId() == employeeId && payslip.getMonth() == month && payslip.getYear() == year) {
@@ -253,9 +234,8 @@ public class EmployeeManager {
         Employee employee = findEmployeeById(id);
         if (employee instanceof SalaryEmployee) {
             SalaryEmployee sal = (SalaryEmployee) employee;
-            int[] monthAndYear = inputMonthAndYear("Enter Current Month/Year (e.g. 1/2021): ");
-            int month = monthAndYear[0];
-            int year = monthAndYear[1];
+            int month = inputInt("Enter Current Month (Number 1 - 12): ");
+            int year = inputInt("Enter Current Year (4-Digit Number e.g. 2021): ");
             Payslip existingPayslip = findPayslip(employee.getId(), month, year);
             if (existingPayslip == null) {
                 Payslip newPayslip = new Payslip(
