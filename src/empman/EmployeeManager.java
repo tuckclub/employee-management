@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class EmployeeManager {
     private DataStore dataStore = new DataStore("data-employees.json", "data-payslips.json");
-    private List<Employee> employees = dataStore.readEmployees();
-    private List<Payslip> payslips = dataStore.readPayslips();
+    private List<Employee> allEmployees = dataStore.readEmployees();
+    private List<Payslip> allPayslips = dataStore.readPayslips();
     private Scanner scanner = new Scanner(System.in);
 
     // Section 1: User Input Operations
@@ -30,12 +30,12 @@ public class EmployeeManager {
     // Section 2: Employee Operations
 
     private void writeEmployees() {
-        dataStore.writeEmployees(employees);
+        dataStore.writeEmployees(allEmployees);
     }
 
     private int getNextEmployeeId() {
         int maxId = 0;
-        for (Employee emp : employees) {
+        for (Employee emp : allEmployees) {
             int currentId = emp.getId();
             if (currentId > maxId) {
                 maxId = currentId;
@@ -45,7 +45,7 @@ public class EmployeeManager {
     }
 
     private Employee findEmployeeById(int id) {
-        for (Employee employee : employees) {
+        for (Employee employee : allEmployees) {
             if (employee.getId() == id) {
                 return employee;
             }
@@ -61,7 +61,7 @@ public class EmployeeManager {
         double currentMonthOtHours = inputDouble("Enter Employee Current Month OT Hours: ");
         int id = getNextEmployeeId();
         SalaryEmployee employee = new SalaryEmployee(id, name, department, salary, otHourlyWage, currentMonthOtHours);
-        employees.add(employee);
+        allEmployees.add(employee);
         writeEmployees();
         System.out.println("Salary Employee Created: ");
         System.out.println("\t" + employee);
@@ -150,7 +150,7 @@ public class EmployeeManager {
         int id = inputInt("Enter Employee ID: ");
         Employee employee = findEmployeeById(id);
         if (employee != null) {
-            employees.remove(employee);
+            allEmployees.remove(employee);
             writeEmployees();
             System.out.println("Employee Deleted: ");
             System.out.println("\t" + employee);
@@ -176,7 +176,7 @@ public class EmployeeManager {
             "Current Month OT Hours"
         );
         System.out.println(thinLine);
-        for (Employee emp : employees) {
+        for (Employee emp : allEmployees) {
             if (emp instanceof SalaryEmployee) {
                 SalaryEmployee sal = (SalaryEmployee) emp;
                 System.out.printf(
@@ -196,7 +196,7 @@ public class EmployeeManager {
     // Section 3: Payslip Operations
 
     private void writePayslips() {
-        dataStore.writePayslips(payslips);
+        dataStore.writePayslips(allPayslips);
     }
 
     private int[] inputMonthAndYear(String label) {
@@ -219,7 +219,7 @@ public class EmployeeManager {
     }
 
     private Payslip findPayslip(int employeeId, int month, int year) {
-        for (Payslip payslip : payslips) {
+        for (Payslip payslip : allPayslips) {
             if (payslip.getEmployeeId() == employeeId && payslip.getMonth() == month && payslip.getYear() == year) {
                 return payslip;
             }
@@ -229,7 +229,7 @@ public class EmployeeManager {
 
     private List<Payslip> findPayslipsByEmployeeId(int employeeId) {
         List<Payslip> list = new ArrayList<Payslip>();
-        for (Payslip payslip : payslips) {
+        for (Payslip payslip : allPayslips) {
             if (payslip.getEmployeeId() == employeeId) {
                 list.add(payslip);
             }
@@ -257,7 +257,7 @@ public class EmployeeManager {
                     month,
                     year
                 );
-                payslips.add(newPayslip);
+                allPayslips.add(newPayslip);
                 writePayslips();
                 showPayslip(newPayslip);
             } else {
@@ -272,7 +272,7 @@ public class EmployeeManager {
     public void showPayslips() {
         int employeeId = inputInt("Enter Employee ID (Enter 0 To Show All Payslips): ");
         if (employeeId == 0) {
-            showPayslips(payslips);
+            showPayslips(allPayslips);
         } else {
             showPayslips(findPayslipsByEmployeeId(employeeId));
         }
