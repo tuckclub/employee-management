@@ -16,7 +16,7 @@ public class Main {
             System.out.println(" [5] Edit Employee OT Hourly Wage.");
             System.out.println(" [6] Edit Employee Current Month OT Hours.");
             System.out.println(" [7] Delete Employee.");
-            System.out.println(" [8] Show Employee Records.");
+            System.out.println(" [8] Show Employees.");
             System.out.println(" [9] Create Payslip.");
             System.out.println("[10] Show Payslips.");
             System.out.println(" [0] Exit Program.");
@@ -30,7 +30,7 @@ public class Main {
                 case "5" -> empman.editEmployeeOtHourlyWage();
                 case "6" -> empman.editEmployeeCurrentMonthOtHours();
                 case "7" -> empman.deleteEmployee();
-                case "8" -> empman.showEmployeeRecords();
+                case "8" -> empman.showEmployees();
                 case "9" -> empman.createPayslip();
                 case "10" -> empman.showPayslips();
                 case "0" -> {

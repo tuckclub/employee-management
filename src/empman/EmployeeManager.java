@@ -64,7 +64,7 @@ public class EmployeeManager {
         allEmployees.add(employee);
         writeEmployees();
         System.out.println("Salary Employee Created: ");
-        System.out.println("\t" + employee);
+        showEmployee(employee);
     }
 
     public void editEmployeeName() {
@@ -75,7 +75,7 @@ public class EmployeeManager {
             employee.setName(newName);
             writeEmployees();
             System.out.println("Employee Name Edited: ");
-            System.out.println("\t" + employee);
+            showEmployee(employee);
         } else {
             System.out.println("Employee ID Not Found.");
         }
@@ -89,7 +89,7 @@ public class EmployeeManager {
             employee.setDepartment(newDepartment);
             writeEmployees();
             System.out.println("Employee Department Edited: ");
-            System.out.println("\t" + employee);
+            showEmployee(employee);
         } else {
             System.out.println("Employee ID Not Found.");
         }
@@ -106,7 +106,7 @@ public class EmployeeManager {
             salaryEmployee.setSalary(newSalary);
             writeEmployees();
             System.out.println("Employee Salary Edited: ");
-            System.out.println("\t" + employee);
+            showEmployee(employee);
         } else {
             System.out.println("Employee Does Not Have Salary.");
         }
@@ -123,7 +123,7 @@ public class EmployeeManager {
             salaryEmployee.setOtHourlyWage(newOtHourlyWage);
             writeEmployees();
             System.out.println("Employee OT Hourly Wage Edited: ");
-            System.out.println("\t" + employee);
+            showEmployee(employee);
         } else {
             System.out.println("Employee Does Not Have OT Hourly Wage.");
         }
@@ -140,7 +140,7 @@ public class EmployeeManager {
             salaryEmployee.setCurrentMonthOtHours(newOtHours);
             writeEmployees();
             System.out.println("Employee Current Month OT Hours Edited: ");
-            System.out.println("\t" + employee);
+            showEmployee(employee);
         } else {
             System.out.println("Employee Does Not Have Current Month OT Hours.");
         }
@@ -153,18 +153,29 @@ public class EmployeeManager {
             allEmployees.remove(employee);
             writeEmployees();
             System.out.println("Employee Deleted: ");
-            System.out.println("\t" + employee);
+            showEmployee(employee);
         } else {
             System.out.println("Employee ID Not Found.");
         }
     }
 
-    public void showEmployeeRecords() {
+    public void showEmployees() {
+        System.out.println();
+        System.out.println("Employees");
+        showEmployees(allEmployees);
+        System.out.println();
+    }
+
+    private void showEmployee(Employee employee) {
+        List<Employee> list = new ArrayList<Employee>();
+        list.add(employee);
+        showEmployees(list);
+    }
+
+    private void showEmployees(List<Employee> employees) {
         int lineLength = 5 + 20 + 15 + 15 + 20 + 30;
         String thinLine = "-".repeat(lineLength);
         String thickLine = "=".repeat(lineLength);
-        System.out.println();
-        System.out.println("Employee Records");
         System.out.println(thickLine);
         System.out.printf(
             "%5s%20s%15s%15s%20s%30s\n",
@@ -176,11 +187,11 @@ public class EmployeeManager {
             "Current Month OT Hours"
         );
         System.out.println(thinLine);
-        for (Employee emp : allEmployees) {
+        for (Employee emp : employees) {
             if (emp instanceof SalaryEmployee) {
                 SalaryEmployee sal = (SalaryEmployee) emp;
                 System.out.printf(
-                    "%5d%20s%15s%15.2f%20.2f%30.2f\n",
+                    "%5d%20s%15s%,15.2f%,20.2f%,30.2f\n",
                     sal.getId(),
                     sal.getName(),
                     sal.getDepartment(),
