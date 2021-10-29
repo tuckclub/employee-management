@@ -42,7 +42,6 @@ public class Main {
                     continue;
                 }
             }
-            System.out.println("#".repeat(50));
             System.out.print("Press Enter Key To Continue...");
             scanner.nextLine();
         }
