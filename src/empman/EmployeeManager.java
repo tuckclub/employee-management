@@ -1,5 +1,6 @@
 package empman;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -226,6 +227,16 @@ public class EmployeeManager {
         return null;
     }
 
+    private List<Payslip> findPayslipsByEmployeeId(int employeeId) {
+        List<Payslip> list = new ArrayList<Payslip>();
+        for (Payslip payslip : payslips) {
+            if (payslip.getEmployeeId() == employeeId) {
+                list.add(payslip);
+            }
+        }
+        return list;
+    }
+
     public void createPayslip() {
         int id = inputInt("Enter Employee ID: ");
         Employee employee = findEmployeeById(id);
@@ -257,8 +268,18 @@ public class EmployeeManager {
     }
 
     public void showPayslips() {
-        Payslip payslip = payslips.get(0);
-        showPayslip(payslip);
+        int employeeId = inputInt("Enter Employee ID (Enter 0 To Show All Payslips): ");
+        if (employeeId == 0) {
+            showPayslips(payslips);
+        } else {
+            showPayslips(findPayslipsByEmployeeId(employeeId));
+        }
+    }
+
+    private void showPayslips(List<Payslip> payslips) {
+        for (Payslip payslip : payslips) {
+            showPayslip(payslip);
+        }
     }
 
     private void showPayslip(Payslip payslip) {
