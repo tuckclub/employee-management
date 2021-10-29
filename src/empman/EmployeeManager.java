@@ -259,8 +259,10 @@ public class EmployeeManager {
                 );
                 payslips.add(newPayslip);
                 writePayslips();
+                showPayslip(newPayslip);
             } else {
                 System.out.println("*** Payslip Already Exists. Cannot Create A New One. ***");
+                showPayslip(existingPayslip);
             }
         } else {
             System.out.println("Employee ID Not Found.");
@@ -286,7 +288,6 @@ public class EmployeeManager {
         int lineLength = 20 + 50 + 30;
         String thinLine = "-".repeat(lineLength);
         String thickLine = "=".repeat(lineLength);
-        System.out.println();
         System.out.println(thickLine);
         System.out.printf("Payslip For The Month Of %s %d\n", getMonthName(payslip.getMonth()), payslip.getYear());
         System.out.printf("Employee ID:   %04d\n", payslip.getEmployeeId());
@@ -306,6 +307,7 @@ public class EmployeeManager {
         System.out.println(thinLine);
         System.out.printf("%70s%,30.2f\n", "Total", total);
         System.out.println(thickLine);
+        System.out.println();
     }
 
     private String getMonthName(int month) {
