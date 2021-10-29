@@ -265,8 +265,16 @@ public class EmployeeManager {
         if (employeeId == 0) {
             showPayslips(allPayslips);
         } else {
-            showPayslips(findPayslipsByEmployeeId(employeeId));
+            List<Payslip> payslips = findPayslipsByEmployeeId(employeeId);
+            payslips.sort(this::compareTwoPayslips);
+            showPayslips(payslips);
         }
+    }
+
+    private int compareTwoPayslips(Payslip p1, Payslip p2) {
+        int yearMonth1 = p1.getYear() * 100 + p1.getMonth();
+        int yearMonth2 = p2.getYear() * 100 + p2.getMonth();
+        return yearMonth1 - yearMonth2;
     }
 
     private void showPayslips(List<Payslip> payslips) {
